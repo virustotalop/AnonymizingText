@@ -11,3 +11,5 @@ http://www.pbs.org/opb/historydetectives/blog/how-we-solved-it-stylometric-analy
 # Machine Learning
 
 http://cs229.stanford.edu/proj2013/StankoLuHsu-AuthorIdentification.pdf
+
+https://www.csie.ntu.edu.tw/~cjlin/papers/liblinear.pdf
