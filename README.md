@@ -5,3 +5,5 @@ This project is meant to be research in re-anonymizing text. There has been prev
 ### [Research](RESEARCH.md)
 
 ### [Tools](TOOLS.md)
+
+### [Thesaurus](THESAURUS.md)
