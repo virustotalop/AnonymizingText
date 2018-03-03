@@ -7,10 +7,3 @@ https://www.smh.com.au/technology/why-hackers-should-be-afraid-of-how-they-write
 https://journal.r-project.org/archive/2016-1/eder-rybicki-kestemont.pdf
 
 http://www.pbs.org/opb/historydetectives/blog/how-we-solved-it-stylometric-analysis/
-
-# Tools
-
-https://psal.cs.drexel.edu/index.php/JStylo-Anonymouth#You-can-download-it-here
-
-https://github.com/neerajrao/hybrid-svm-author-attribution
-
