@@ -17,3 +17,7 @@ https://www.csie.ntu.edu.tw/~cjlin/papers/liblinear.pdf
 https://towardsdatascience.com/machine-learning-nlp-text-classification-using-scikit-learn-python-and-nltk-c52b92a7c73a
 
 https://fasttext.cc/docs/en/supervised-tutorial.html
+
+# Other research
+
+https://dataprivacylab.org/projects/scrub/paper1.pdf
