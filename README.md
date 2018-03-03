@@ -7,3 +7,8 @@ This project is meant to be research in re-anonymizing text. There has been prev
 ### [Thesaurus](THESAURUS.md)
 
 ### [Tools](TOOLS.md)
+
+
+# Credits
+
+//TODO
