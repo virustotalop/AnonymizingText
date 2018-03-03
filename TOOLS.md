@@ -18,3 +18,7 @@ https://github.com/cfinke/Typo.js/
 # Anonymization
 
 https://github.com/psal/anonymouth
+
+http://arx.deidentifier.org/
+
+https://scrubber.nlm.nih.gov/files/
