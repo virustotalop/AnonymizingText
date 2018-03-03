@@ -21,3 +21,5 @@ https://fasttext.cc/docs/en/supervised-tutorial.html
 # Other research
 
 https://dataprivacylab.org/projects/scrub/paper1.pdf
+
+https://ddu1.github.io/Anonymization/
