@@ -1,4 +1,4 @@
-# Reading
+# Stylometry
 
 https://en.wikipedia.org/wiki/Stylometry
 
