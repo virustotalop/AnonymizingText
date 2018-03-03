@@ -9,3 +9,5 @@ https://www.csie.ntu.edu.tw/~cjlin/liblinear/
 # Plugin
 
 https://github.com/wooorm/parse-english
+
+https://github.com/cfinke/Typo.js/
