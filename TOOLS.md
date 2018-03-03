@@ -9,12 +9,6 @@ https://www.csie.ntu.edu.tw/~cjlin/liblinear/ - [Usage](https://www.csie.ntu.edu
 https://github.com/psal/jstylo
 
 
-# Plugin
-
-https://github.com/wooorm/parse-english
-
-https://github.com/cfinke/Typo.js/
-
 # Anonymization
 
 https://github.com/psal/anonymouth
