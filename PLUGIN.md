@@ -7,3 +7,9 @@ The logic of the plugin should flow as follows.
 4. Check for spelling mistakes, fix them.
 5. Make spelling mistakes sometimes.
 6. Re-structure text from tree.
+
+# Libraries
+
+https://github.com/wooorm/parse-english
+
+https://github.com/cfinke/Typo.js/
