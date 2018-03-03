@@ -13,3 +13,5 @@ http://www.pbs.org/opb/historydetectives/blog/how-we-solved-it-stylometric-analy
 http://cs229.stanford.edu/proj2013/StankoLuHsu-AuthorIdentification.pdf
 
 https://www.csie.ntu.edu.tw/~cjlin/papers/liblinear.pdf
+
+https://towardsdatascience.com/machine-learning-nlp-text-classification-using-scikit-learn-python-and-nltk-c52b92a7c73a
