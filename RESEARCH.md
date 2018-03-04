@@ -27,3 +27,5 @@ https://dataprivacylab.org/projects/scrub/paper1.pdf
 https://ddu1.github.io/Anonymization/
 
 https://en.wikipedia.org/wiki/Data_anonymization
+
+http://www.tdp.cat/issues11/tdp.a095a12.pdf
