@@ -1,12 +1,8 @@
 # Current Thesaurus
 
-The current thesaurus is using wordnet from princeton.
+The current thesaurus is using Moby.
 
-How the thesaurus is built.
-* Download the wordnet database package.
-* Copy the .exc files from the archive into a new directory.
-* Install python if not done already.
-* Run the provided python script against them to build the thesaurus.
+The thesaurus is in public domain in the United States according to project gutenberg.
 
 # Potential Resources
 https://www.gutenberg.org/ebooks/3202
