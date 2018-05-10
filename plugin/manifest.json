@@ -14,7 +14,7 @@
 	"menus"
   ],
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["thesaurus.js", "background.js"]
   },
   "content_scripts": [
     {

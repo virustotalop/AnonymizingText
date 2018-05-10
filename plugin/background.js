@@ -1,4 +1,4 @@
-var requestDB = indexedDB.open("anonymize");
+/*var requestDB = indexedDB.open("anonymize");
 
 requestDB.onupgradeneeded = function() {
 	
@@ -7,7 +7,9 @@ requestDB.onupgradeneeded = function() {
 	var key = store.createIndex("by_check", "check");
 	var value = store.createIndex("by_replace", "replace");
 	
-};
+};*/
+
+console.log(thesaurus.get("absolve"));
 
 browser.menus.create({
   id: "anonymize-text",
