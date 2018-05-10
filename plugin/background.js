@@ -1,3 +1,14 @@
+var requestDB = indexedDB.open("anonymize");
+
+requestDB.onupgradeneeded = function() {
+	
+	var db = requestDB.result;
+	var store = db.createObjectStore("thesaurus");
+	var key = store.createIndex("by_check", "check");
+	var value = store.createIndex("by_replace", "replace");
+	
+};
+
 browser.menus.create({
   id: "anonymize-text",
   title: "Anonymize Text",
@@ -10,3 +21,4 @@ browser.menus.onClicked.addListener((info, tab) => {
 		console.log("test");
 	}
 });
+
