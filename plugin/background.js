@@ -17,10 +17,25 @@ browser.menus.create({
   contexts: ["all"]
 });
 
+function messageTab(tabs) {
+  browser.tabs.sendMessage(tabs[0].id, "anonymize-text");
+}
+
+function onExecuted(result) {
+    var querying = browser.tabs.query({
+        active: true,
+        currentWindow: true
+    });
+    querying.then(messageTab);
+}
+
 browser.menus.onClicked.addListener((info, tab) => {
 	if(info.menuItemId == "anonymize-text")
 	{
+		let executing = browser.tabs.executeScript({
+			file: "anonymize-text.js"
+		});
+		executing.then(onExecuted);
 		console.log("test");
 	}
 });
-
