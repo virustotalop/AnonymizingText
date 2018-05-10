@@ -4,7 +4,7 @@
   "name": "Anonymize Text",
   "version": "1.0",
 
-  "description": "Adds a red border to all webpages matching mozilla.org.",
+  "description": "Anonymize text.",
 
   "icons": {
     "48": "icons/icon-48.png"
