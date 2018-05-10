@@ -18,7 +18,7 @@ browser.menus.create({
 });
 
 function messageTab(tabs) {
-  browser.tabs.sendMessage(tabs[0].id, "anonymize-text");
+  browser.tabs.sendMessage(tabs[0].id, { id: "anonymizeText"});
 }
 
 function onExecuted(result) {

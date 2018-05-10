@@ -3,20 +3,39 @@
 
 
 
-document.addEventListener("mousedown", function(event){
+document.addEventListener("mousedown", function(event)
+{
 	if(event.button == 2) 
 	{ 
-        var clicked = event.target;
+        	var clicked = event.target;
+			alert("right clicked");
 		browser.runtime.sendMessage({
-			id: "current-target",
-			current-target: clicked
+			id: "currentTarget",
+			currentTarget: clicked
 		});
-    }
+		
+	}
 }, true);
 
 
-browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if(request == "anonymize-text") {
-        alert(clicked);
-    }
+browser.runtime.onMessage.addListener(function(request, sender, sendResponse) 
+{
+	if(request.id != null && request.id == "anonymizeText") 
+	{
+		alert("Received anonymizeText");
+        	browser.runtime.sendMessage({
+			id: "sendTarget"
+		});
+	}
 });
+
+browser.runtime.onMessage.addListener(function(request, sender, sendResponse) 
+{
+	if(request.id != null && request.id == "receiveTarget")
+	{
+		alert("received target");
+		
+	}
+});
+
+

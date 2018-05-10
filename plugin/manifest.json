@@ -14,7 +14,7 @@
 	"menus"
   ],
   "background": {
-    "scripts": ["thesaurus.js", "background.js"]
+    "scripts": ["saved-target.js", "thesaurus.js", "background.js"]
   },
   "content_scripts": [
     {
