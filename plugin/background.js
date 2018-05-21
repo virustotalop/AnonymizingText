@@ -53,7 +53,12 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		console.log(split);
 		for(var i = 0; i < split.length; i++)
 		{
-			console.log(split[i] + ": " + thesaurus.get(split[i]));
+			var synonym = thesaurus.get(split[i]);
+			console.log(split[i] + " : " + synonym);
+			if(synonym != undefined)
+			{
+				transformText = transformText.replace(split[i], synonym);
+			}
 		}
 		
 		//Save transformed text

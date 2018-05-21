@@ -2410,7 +2410,6 @@ thesaurus.set("amyotrophic lateral sclerosis", "ALS");
 thesaurus.set("amyotrophy", "amyotrophia"); 
 thesaurus.set("amytal", "amobarbital sodium"); 
 thesaurus.set("amyxia", "physiological state"); 
-thesaurus.set("an", "Associate in Nursing"); 
 thesaurus.set("ana", "Ana"); 
 thesaurus.set("anabolic steroid", "steroid hormone"); 
 thesaurus.set("anabolism", "constructive metabolism"); 
