@@ -48,6 +48,15 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		var transformText = request.savedText;
 		//savedText = "Some different text that is not the original";
 		//Apply transformation
+		
+		var split = transformText.split(" ");
+		console.log(split);
+		for(var i = 0; i < split.length; i++)
+		{
+			console.log(split[i] + ": " + thesaurus.get(split[i]));
+		}
+		
+		//Save transformed text
 		savedText = transformText;
 		//Send message
 		sendMessage(sendTransformedText);
