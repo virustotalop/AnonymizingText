@@ -57,12 +57,19 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 			console.log(split[i] + " : " + synonym);
 			if(synonym != undefined)
 			{
-				transformText = transformText.replace(split[i], synonym);
+				split[i] = synonym;
 			}
 		}
 		
+		var newText = "";
+		for(var i = 0; i < split.length; i++)
+		{
+			newText += split[i] + " ";
+		}
+		
+		
 		//Save transformed text
-		savedText = transformText;
+		savedText = newText;
 		//Send message
 		sendMessage(sendTransformedText);
 		console.log("sending transformed text");
