@@ -11,31 +11,46 @@ requestDB.onupgradeneeded = function() {
 
 console.log(thesaurus.get("absolve"));
 
+var savedText = null;
+
 browser.menus.create({
   id: "anonymize-text",
   title: "Anonymize Text",
   contexts: ["all"]
 });
 
-function messageTab(tabs) {
-  browser.tabs.sendMessage(tabs[0].id, { id: "anonymizeText"});
+var sendMessage = function(message) {
+	var querying = browser.tabs.query({
+			active: true,
+			currentWindow: true
+	});
+	querying.then(message);
+};
+
+function sendAnonymizeText(tabs) {
+	browser.tabs.sendMessage(tabs[0].id, { id: "anonymizeText"});
 }
 
-function onExecuted(result) {
-    var querying = browser.tabs.query({
-        active: true,
-        currentWindow: true
-    });
-    querying.then(messageTab);
+function sendTransformedText(tabs) {
+	browser.tabs.sendMessage(tabs[0].id, {id: "transformedText", target: target, savedText: savedText});
 }
 
 browser.menus.onClicked.addListener((info, tab) => {
 	if(info.menuItemId == "anonymize-text")
 	{
-		let executing = browser.tabs.executeScript({
-			file: "anonymize-text.js"
-		});
-		executing.then(onExecuted);
+		sendMessage(sendAnonymizeText);
 		console.log("test");
+	}
+});
+
+browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+	if(request.id == "transformText") {
+		var transformText = request.savedText;
+		//savedText = "Some different text that is not the original";
+		//Apply transformation
+		savedText = transformText;
+		//Send message
+		sendMessage(sendTransformedText);
+		console.log("sending transformed text");
 	}
 });

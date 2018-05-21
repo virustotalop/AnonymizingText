@@ -1,16 +1,25 @@
 var target = null;
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-	if(request.id != null && request.id == "currentTarget") {
+	if(request.id == "currentTarget") {
 		console.log("received current target");
 		target = request.target;
 	}
 });
 
+var sendReceiveTarget = function(tabs) {
+	browser.tabs.sendMessage(tabs[0].id, { id: "receiveTarget" , target: target});
+}
+
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-	if(request.id != null && request.id == "sendTarget") {
-		browser.runtime.sendMessage({
+	if(request.id == "sendTarget") {
+		console.log("received send target");
+		
+		console.log("after tabs query");
+		sendMessage(sendReceiveTarget);
+		console.log("sent receive target");
+		/*browser.runtime.sendMessage({
 			id: "receiveTarget",
 			target: target
-		});
+		});*/
 	}
 });
