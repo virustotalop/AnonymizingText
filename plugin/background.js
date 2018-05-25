@@ -49,40 +49,58 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		//savedText = "Some different text that is not the original";
 		//Apply transformation
 		
-		var split = transformText.split(" ");
-		console.log(split);
-		for(var i = 0; i < split.length; i++)
+		var doc = nlp(request.savedText);
+		var out = nlp(request.savedText).normalize().out('array');
+		
+		var split = [];
+		
+		console.log(out);
+		
+		var index = 0;
+		for(var i = 0; i < out.length; i++)
 		{
-			if(split.length <= 1)
-				continue;
-			
-			var capital = false;
-			if(split[i][0] == split[i][0].toUpperCase())
-				
-			var synonym = thesaurus.get(split[i]);
-			if(capital)
-				synonym = thesaurus.get(split[i].toLowerCase());
-			
-			console.log(split[i] + " : " + synonym);
-			if(synonym != undefined)
+			var outSplit = out[i].split(" ");
+			console.log(outSplit);
+			for(var j = 0; j < outSplit.length; j++)
 			{
-				if(capital)
-					split[i] = synonym.toUpperCase() + synonym.substring(1);
-				else
-					split[i] = synonym;
+				console.log(outSplit[j]);
+				split[index] = outSplit[j];
+				index += 1;
 			}
-			
 		}
 		
-		var newText = "";
+		console.log(split);
+		
 		for(var i = 0; i < split.length; i++)
-		{
-			newText += split[i] + " ";
+		{	
+			var checkFor = split[i];
+			var capital = false;
+			if(checkFor[0] == checkFor[0].toUpperCase())
+				
+			var synonym = thesaurus.get(checkFor);
+			if(capital)
+				synonym = thesaurus.get(checkFor.toLowerCase());
+			
+			console.log(checkFor + " : " + synonym);
+			if(synonym != undefined)
+			{
+				var replace = undefined;
+				if(capital)
+				{	
+					replace = synonym.toUpperCase() + synonym.substring(1);
+				}
+				else
+				{
+					replace = synonym;
+				}
+				doc.replace(split[i], replace);
+			}
 		}
+		
 		
 		
 		//Save transformed text
-		savedText = newText;
+		savedText = doc.out();
 		//Send message
 		sendMessage(sendTransformedText);
 		console.log("sending transformed text");
