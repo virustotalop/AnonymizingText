@@ -14,7 +14,7 @@
 	"menus"
   ],
   "background": {
-    "scripts": ["saved-target.js", "thesaurus.js", "background.js"]
+    "scripts": ["compromise.min.js", "saved-target.js", "thesaurus.js", "background.js"]
   },
   "content_scripts": [
     {
