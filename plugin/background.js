@@ -76,7 +76,8 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 			var checkFor = split[i];
 			var capital = false;
 			if(checkFor[0] == checkFor[0].toUpperCase())
-				
+				capital = true;
+			
 			var synonym = thesaurus.get(checkFor);
 			if(capital)
 				synonym = thesaurus.get(checkFor.toLowerCase());
