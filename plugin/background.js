@@ -53,12 +53,25 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		console.log(split);
 		for(var i = 0; i < split.length; i++)
 		{
+			if(split.length <= 1)
+				continue;
+			
+			var capital = false;
+			if(split[i][0] == split[i][0].toUpperCase())
+				
 			var synonym = thesaurus.get(split[i]);
+			if(capital)
+				synonym = thesaurus.get(split[i].toLowerCase());
+			
 			console.log(split[i] + " : " + synonym);
 			if(synonym != undefined)
 			{
-				split[i] = synonym;
+				if(capital)
+					split[i] = synonym.toUpperCase() + synonym.substring(1);
+				else
+					split[i] = synonym;
 			}
+			
 		}
 		
 		var newText = "";
