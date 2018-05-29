@@ -101,7 +101,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 		
 		
 		//Save transformed text
-		savedText = doc.out();
+		savedText = doc.out('text');
 		//Send message
 		sendMessage(sendTransformedText);
 		console.log("sending transformed text");
