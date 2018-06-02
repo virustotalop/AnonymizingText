@@ -88,7 +88,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 				var replace = undefined;
 				if(capital)
 				{	
-					replace = synonym.toUpperCase() + synonym.substring(1);
+					replace = synonym[0].toUpperCase() + synonym.substring(1);
 				}
 				else
 				{
