@@ -1,5 +1,6 @@
 # Tool setup
+* pip install selenium
 * Run setup-workspace.py
 * Run scrape-documents.py, you will need a reddit api key
 * Run anonymize-documents.py, you will need a local web server setup with test.html on localhost/test.html
-* Run document analysis to get analyzed reports per document and the data averaged overall.
+* Run document analysis to get analyzed reports per document and the data averaged overall
