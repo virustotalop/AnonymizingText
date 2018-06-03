@@ -43,66 +43,89 @@ browser.menus.onClicked.addListener((info, tab) => {
 	}
 });
 
+//Work around for both issues with parsing currently
+function cleanupText(transformText) {
+	var comma = cleanupCommas(transformText);
+	var space = cleanupSpaces(comma);
+	while(space.includes("  "))
+	{
+		space = cleanupSpaces(space);
+	}
+	return space;
+}
+//Temporary workaround for comma glitch (having a space infront of a comma)
+function cleanupCommas(transformText) {
+	return transformText.replace(" , " , ", ");
+}
+
+//Temporary workaround for double space glitch
+function cleanupSpaces(transformText) {
+	return transformText.replace("  ", " ");
+}
+
+function anonymizeText(transformText) {
+	
+	var doc = nlp(transformText);
+	var out = nlp(transformText).out('array');
+		
+	var split = [];
+		
+	console.log(out);
+		
+	var index = 0;
+	for(var i = 0; i < out.length; i++)
+	{
+		var outSplit = out[i].split(" ");
+		console.log(outSplit);
+		for(var j = 0; j < outSplit.length; j++)
+		{
+			console.log(outSplit[j]);
+			split[index] = outSplit[j];
+			index += 1;
+		}
+	}
+		
+	console.log(split);
+		
+	for(var i = 0; i < split.length; i++)
+	{	
+		var checkFor = split[i];
+		var capital = false;
+		if(checkFor[0] == checkFor[0].toUpperCase())
+			capital = true;
+		console.log("Check for: " + checkFor);
+		var synonym = thesaurus.get(checkFor);
+		if(capital)
+			synonym = thesaurus.get(checkFor.toLowerCase());
+			
+		console.log(checkFor + " : " + synonym);
+		if(synonym != undefined)
+		{
+			var replace = undefined;
+			if(capital)
+			{	
+				replace = synonym[0].toUpperCase() + synonym.substring(1);
+			}
+			else
+			{
+				replace = synonym;
+			}
+			console.log("Is capital: " + capital);
+			doc.replace(split[i], replace);
+		}
+	}
+	console.log(doc.sentences());
+	var outText = doc.out('text');
+	console.log("outText: " + outText);
+	var cleanedText = cleanupText(outText);
+	return cleanedText;
+}
+
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	if(request.id == "transformText") {
-		var transformText = request.savedText;
-		//savedText = "Some different text that is not the original";
-		//Apply transformation
-		
-		var doc = nlp(request.savedText);
-		var out = nlp(request.savedText).normalize().out('array');
-		
-		var split = [];
-		
-		console.log(out);
-		
-		var index = 0;
-		for(var i = 0; i < out.length; i++)
-		{
-			var outSplit = out[i].split(" ");
-			console.log(outSplit);
-			for(var j = 0; j < outSplit.length; j++)
-			{
-				console.log(outSplit[j]);
-				split[index] = outSplit[j];
-				index += 1;
-			}
-		}
-		
-		console.log(split);
-		
-		for(var i = 0; i < split.length; i++)
-		{	
-			var checkFor = split[i];
-			var capital = false;
-			if(checkFor[0] == checkFor[0].toUpperCase())
-				capital = true;
-			
-			var synonym = thesaurus.get(checkFor);
-			if(capital)
-				synonym = thesaurus.get(checkFor.toLowerCase());
-			
-			console.log(checkFor + " : " + synonym);
-			if(synonym != undefined)
-			{
-				var replace = undefined;
-				if(capital)
-				{	
-					replace = synonym[0].toUpperCase() + synonym.substring(1);
-				}
-				else
-				{
-					replace = synonym;
-				}
-				doc.replace(split[i], replace);
-			}
-		}
-		
-		
-		
+		var transformedText = anonymizeText(request.savedText); 
 		//Save transformed text
-		savedText = doc.out('text');
-		//Send message
+		savedText = transformedText;
 		sendMessage(sendTransformedText);
 		console.log("sending transformed text");
 	}
