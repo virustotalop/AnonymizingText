@@ -72,12 +72,13 @@ for file_name in os.listdir(original_dir):
 	documents += 1
 	
 	#break
-
+print(str(documents) + " documents")
+print(str(original_words_count) + " words originally")
 print(str(changed_words_count) + " changed words")
 changed_words_count_percentage = "%.2f" % ((changed_words_count / original_words_count) * 100)
-print(changed_words_count_percentage + "% of words changed out of " + str(documents) + " documents")
+print(changed_words_count_percentage + "% of words changed")
 print("Original length: " + str(original_length))
 print("Changed length: " + str(changed_length))
 print("With a character difference of " + str(document_difference))
 character_difference_percentage = "%.2f" % ((document_difference/original_length) * 100)
-print(character_difference_percentage + "% of document length changed out of " + str(documents) + " documents")
+print(character_difference_percentage + "% of document length changed")
