@@ -1,6 +1,7 @@
 # Tool setup
-* pip install selenium
+* pip install praw
 * Run setup-workspace.py
 * Run scrape-documents.py, you will need a reddit api key
+* pip install selenium
 * Run anonymize-documents.py, you will need a local web server setup with test.html on localhost/test.html
 * Run document analysis to get analyzed reports per document and the data averaged overall
