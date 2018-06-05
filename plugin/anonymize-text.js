@@ -22,7 +22,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse)
 {
 	if(request.id == "anonymizeText") 
 	{
-			alert("Received anonymizeText");
+			//alert("Received anonymizeText");
         	browser.runtime.sendMessage({
 			id: "sendTarget"
 		});
@@ -34,11 +34,11 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse)
 {
 	if(request.id == "receiveTarget")
 	{
-		alert("received target");
+		//alert("received target");
 		var targetId = request.target;
 		var requestedTarget = document.getElementById(targetId);
 		var requestedText = requestedTarget.value;
-		alert(requestedText);
+		//alert(requestedText);
 		browser.runtime.sendMessage({
 			id: "transformText",
 			savedText: requestedText
