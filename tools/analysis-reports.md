@@ -1,6 +1,6 @@
 # Report #1 
 
-Commit: a735b913124fe7a8ce9322a16f2bc43f16459ddc
+Commit: [a735b913124fe7a8ce9322a16f2bc43f16459ddc](https://github.com/virustotalop/AnonymizingText/commit/a735b913124fe7a8ce9322a16f2bc43f16459ddc)
 
 300 documents
 
