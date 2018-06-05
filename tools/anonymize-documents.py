@@ -23,30 +23,29 @@ os.chdir("tools")
 data_element = driver.find_element_by_id("test-data")
 data_element.clear()
 
-#location = data_element.location
-
 time.sleep(5)
-
-
 
 docs_dir = os.path.join(os.getcwd(), "docs")
 original_dir = os.path.join(docs_dir, "original")
 anonymized_dir = os.path.join(docs_dir, "anonymized")
 
+pyautogui.PAUSE = 1
+pyautogui.FAILSAFE = True
+
 for file in os.listdir(original_dir):
 	read_file = open(os.path.join(original_dir, file), "r", encoding="utf-8")
 	str = read_file.read()
+	data_element.clear()
 	data_element.send_keys(str)
 	read_file.close()
 	pyautogui.moveTo(100, 150) #Will need to be changed later
 	pyautogui.rightClick()
-	pyautogui.moveTo(120, 380)
-	pyautogui.click()
-	time.sleep(1)
+	pyautogui.press('up')
+	pyautogui.press('enter')
 	anonymized_text = data_element.get_attribute("value")
-	print(anonymized_text)
+	#print(anonymized_text)
 	out_file = open(os.path.join(anonymized_dir, file), "w", encoding="utf-8")
 	out_file.write(anonymized_text)
 	out_file.close()
-	break
+	#break
 	
