@@ -56,6 +56,11 @@ function cleanupText(transformText)
 	return period;
 }
 
+function isEndingPunctuation(ch)
+{
+	return (ch == '.' || ch == '!' || ch == '?');
+}
+
 //Workaround to cleanup periods not having a space after them
 function cleanupPeriod(transformText) 
 {
@@ -63,11 +68,9 @@ function cleanupPeriod(transformText)
 	for(var i = 0; i < transformText.length; i++)
 	{
 
-		if(transformText[i] == '.' && i + 1 < transformText.length && transformText[i + 1] != ' ')
+		if(isEndingPunctuation(transformText[i]) && i + 1 < transformText.length && transformText[i + 1] != ' ')
 		{
-			console.log("is period: " + (transformText[i] == '.'));
-			console.log("before: " + (transformText[i - 1]));
-			newText += ". ";
+			newText += transformText[i] + " ";
 		}
 		else
 		{
