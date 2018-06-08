@@ -44,40 +44,57 @@ browser.menus.onClicked.addListener((info, tab) => {
 });
 
 //Work around for both issues with parsing currently
-function cleanupText(transformText) {
+function cleanupText(transformText) 
+{
 	var comma = cleanupCommas(transformText);
 	var space = cleanupSpaces(comma);
 	while(space.includes("  "))
 	{
 		space = cleanupSpaces(space);
 	}
-	var period = cleaupPeriod(space);
+	var period = cleanupPeriod(space);
 	return period;
 }
 
 //Workaround to cleanup periods not having a space after them
-function cleanupPeriod(transformText) {
+function cleanupPeriod(transformText) 
+{
+	var newText = "";
 	for(var i = 0; i < transformText.length; i++)
 	{
+
 		if(transformText[i] == '.' && i + 1 < transformText.length && transformText[i + 1] != ' ')
 		{
-			transformText = transformText.substring(0, i) + " " + transformText.substring(i + 1);
-			i--;
+			console.log("is period: " + (transformText[i] == '.'));
+			console.log("before: " + (transformText[i - 1]));
+			newText += ". ";
+		}
+		else
+		{
+			newText += transformText[i];
 		}
 	}
+	if(newText == "")
+	{
+		return transformText;
+	}
+	return newText;
 }
 
 //Temporary workaround for comma glitch (having a space infront of a comma)
-function cleanupCommas(transformText) {
+function cleanupCommas(transformText) 
+{
 	return transformText.replace(" , " , ", ");
 }
 
 //Temporary workaround for double space glitch
-function cleanupSpaces(transformText) {
+function cleanupSpaces(transformText) 
+{
 	return transformText.replace("  ", " ");
 }
 
-function anonymizeText(transformText) {
+function anonymizeText(transformText) 
+{
 	
 	var doc = nlp(transformText);
 	var out = nlp(transformText).out('array');
@@ -93,7 +110,7 @@ function anonymizeText(transformText) {
 		console.log(outSplit);
 		for(var j = 0; j < outSplit.length; j++)
 		{
-			console.log(outSplit[j]);
+			//console.log(outSplit[j]);
 			split[index] = outSplit[j];
 			index += 1;
 		}
@@ -107,12 +124,12 @@ function anonymizeText(transformText) {
 		var capital = false;
 		if(checkFor[0] == checkFor[0].toUpperCase())
 			capital = true;
-		console.log("Check for: " + checkFor);
+		//console.log("Check for: " + checkFor);
 		var synonym = thesaurus.get(checkFor);
 		if(capital)
 			synonym = thesaurus.get(checkFor.toLowerCase());
 			
-		console.log(checkFor + " : " + synonym);
+		//console.log(checkFor + " : " + synonym);
 		if(synonym != undefined)
 		{
 			var replace = undefined;
@@ -124,7 +141,7 @@ function anonymizeText(transformText) {
 			{
 				replace = synonym;
 			}
-			console.log("Is capital: " + capital);
+			//console.log("Is capital: " + capital);
 			doc.replace(split[i], replace);
 		}
 	}
@@ -135,8 +152,10 @@ function anonymizeText(transformText) {
 	return cleanedText;
 }
 
-browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-	if(request.id == "transformText") {
+browser.runtime.onMessage.addListener(function(request, sender, sendResponse) 
+{
+	if(request.id == "transformText") 
+	{
 		var transformedText = anonymizeText(request.savedText); 
 		//Save transformed text
 		savedText = transformedText;
