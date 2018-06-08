@@ -51,8 +51,22 @@ function cleanupText(transformText) {
 	{
 		space = cleanupSpaces(space);
 	}
-	return space;
+	var period = cleaupPeriod(space);
+	return period;
 }
+
+//Workaround to cleanup periods not having a space after them
+function cleanupPeriod(transformText) {
+	for(var i = 0; i < transformText.length; i++)
+	{
+		if(transformText[i] == '.' && i + 1 < transformText.length && transformText[i + 1] != ' ')
+		{
+			transformText = transformText.substring(0, i) + " " + transformText.substring(i + 1);
+			i--;
+		}
+	}
+}
+
 //Temporary workaround for comma glitch (having a space infront of a comma)
 function cleanupCommas(transformText) {
 	return transformText.replace(" , " , ", ");
