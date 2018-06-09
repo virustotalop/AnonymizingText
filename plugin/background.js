@@ -38,19 +38,32 @@ browser.menus.onClicked.addListener((info, tab) =>
 //Work around for both issues with parsing currently
 function normalizeText(transformText) 
 {
-	var comma = normalizeCommas(transformText);
-	var space = normalizeSpaces(comma);
-	while(space.includes("  "))
+	transformText = normalizeCommas(transformText);
+	transformText = normalizeSpaces(transformText);
+	while(transformText.includes("  "))
 	{
-		space = normalizeSpaces(space);
+		transformText = normalizeSpaces(transformText);
 	}
-	var ending = normalizeEndingPunctuation(space);
-	return ending;
+	transformText = normalizeEndingPunctuation(transformText);
+	transformText = normalizeCapitalization(transformText);
+	return transformText;
 }
 
 function isEndingPunctuation(ch)
 {
 	return (ch == '.' || ch == '!' || ch == '?');
+}
+
+function normalizeCapitalization(transformText)
+{
+	for(var i = 0; i < transformText.length; i++)
+	{
+		if(isEndingPunctuation(transformText[i]) && i + 3 < transformText.length)
+		{
+			transformText = (transformText.substring(0, i + 2) + transformText[i + 2].toUpperCase() + transformText.substring(i + 3));
+		}
+	}
+	return transformText;
 }
 
 //Temporary workaround to cleanup punctuation not having a space after them
