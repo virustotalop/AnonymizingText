@@ -19,7 +19,8 @@ browser.menus.create({
   contexts: ["all"]
 });
 
-var sendMessage = function(message) {
+var sendMessage = function(message) 
+{
 	var querying = browser.tabs.query({
 			active: true,
 			currentWindow: true
@@ -27,19 +28,21 @@ var sendMessage = function(message) {
 	querying.then(message);
 };
 
-function sendAnonymizeText(tabs) {
+function sendAnonymizeText(tabs) 
+{
 	browser.tabs.sendMessage(tabs[0].id, { id: "anonymizeText"});
 }
 
-function sendTransformedText(tabs) {
+function sendTransformedText(tabs) 
+{
 	browser.tabs.sendMessage(tabs[0].id, {id: "transformedText", target: target, savedText: savedText});
 }
 
-browser.menus.onClicked.addListener((info, tab) => {
+browser.menus.onClicked.addListener((info, tab) => 
+{
 	if(info.menuItemId == "anonymize-text")
 	{
 		sendMessage(sendAnonymizeText);
-		console.log("test");
 	}
 });
 
@@ -61,7 +64,7 @@ function isEndingPunctuation(ch)
 	return (ch == '.' || ch == '!' || ch == '?');
 }
 
-//Workaround to cleanup periods not having a space after them
+//Temporary workaround to cleanup periods not having a space after them
 function cleanupPeriod(transformText) 
 {
 	var newText = "";
