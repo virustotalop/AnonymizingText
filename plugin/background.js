@@ -1,14 +1,3 @@
-/*var requestDB = indexedDB.open("anonymize");
-
-requestDB.onupgradeneeded = function() {
-	
-	var db = requestDB.result;
-	var store = db.createObjectStore("thesaurus");
-	var key = store.createIndex("by_check", "check");
-	var value = store.createIndex("by_replace", "replace");
-	
-};*/
-
 console.log(thesaurus.get("absolve"));
 
 var savedText = null;
@@ -47,16 +36,16 @@ browser.menus.onClicked.addListener((info, tab) =>
 });
 
 //Work around for both issues with parsing currently
-function cleanupText(transformText) 
+function normalizeText(transformText) 
 {
-	var comma = cleanupCommas(transformText);
-	var space = cleanupSpaces(comma);
+	var comma = normalizeCommas(transformText);
+	var space = normalizeSpaces(comma);
 	while(space.includes("  "))
 	{
-		space = cleanupSpaces(space);
+		space = normalizeSpaces(space);
 	}
-	var period = cleanupPeriod(space);
-	return period;
+	var ending = normalizeEndingPunctuation(space);
+	return ending;
 }
 
 function isEndingPunctuation(ch)
@@ -64,8 +53,8 @@ function isEndingPunctuation(ch)
 	return (ch == '.' || ch == '!' || ch == '?');
 }
 
-//Temporary workaround to cleanup periods not having a space after them
-function cleanupPeriod(transformText) 
+//Temporary workaround to cleanup punctuation not having a space after them
+function normalizeEndingPunctuation(transformText) 
 {
 	var newText = "";
 	for(var i = 0; i < transformText.length; i++)
@@ -73,6 +62,7 @@ function cleanupPeriod(transformText)
 
 		if(isEndingPunctuation(transformText[i]) && i + 1 < transformText.length && transformText[i + 1] != ' ')
 		{
+			
 			newText += transformText[i] + " ";
 		}
 		else
@@ -88,13 +78,13 @@ function cleanupPeriod(transformText)
 }
 
 //Temporary workaround for comma glitch (having a space infront of a comma)
-function cleanupCommas(transformText) 
+function normalizeCommas(transformText) 
 {
 	return transformText.replace(" , " , ", ");
 }
 
 //Temporary workaround for double space glitch
-function cleanupSpaces(transformText) 
+function normalizeSpaces(transformText) 
 {
 	return transformText.replace("  ", " ");
 }
@@ -154,7 +144,7 @@ function anonymizeText(transformText)
 	console.log(doc.sentences());
 	var outText = doc.out('text');
 	console.log("outText: " + outText);
-	var cleanedText = cleanupText(outText);
+	var cleanedText = normalizeText(outText);
 	return cleanedText;
 }
 
