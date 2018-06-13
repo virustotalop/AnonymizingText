@@ -1,14 +1,23 @@
 # Anonymizing Text
 
-This project is meant to be research in re-anonymizing text. There has been previous research into anonymizing text but its few and far between. I would like to do additional research by using current machine learning methods to test if it can be effective over numerous unique persons. Research will be done by using machine learning and other methods and running them against works found on [Project Gutenberg](https://www.gutenberg.org/) and using online forums. The de-anonymizing process is stylometry, I have linked research on the topic below. Numerous tools will be used during this process and any tools I develop will be posted. The processes that I used to research the topic will be documented.
+This project is meant to be research in anonymizing a user's text. There has been previous research into anonymizing text but its few and far between. The de-anonymizing process is stylometry, [some reading on the topic can be found here](documentation/RESEARCH.md). All tools that have been created for the project can be found in the [tools directory](/tools)
 
-### [Research](RESEARCH.md)
+# Getting started?
 
-### [Thesaurus](THESAURUS.md)
+If you want to help with development you can take a look at the [tools directory](/tools) for getting the development environment setup.
 
-### [Tools](TOOLS.md)
+# How does it work?
 
+The project works by using natural language processing and using a thesaurus to do word replacements.
 
-# Credits
+# How well does it work?
 
-//TODO
+If you want to see how well the project is working over time you can refer to the [generated reports.](documentation/analysis-reports.md)
+
+# Libraries
+
+* Compromise
+* Praw
+* PyAutoGui
+* Selenium
+* TextBlob
