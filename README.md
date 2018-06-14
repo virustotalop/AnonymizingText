@@ -18,6 +18,7 @@ If you want to see how well the project is working over time you can refer to th
 
 * Compromise
 * Praw
+* Flask
 * PyAutoGui
 * Selenium
 * TextBlob
