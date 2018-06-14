@@ -1,13 +1,13 @@
-console.log(thesaurus.get("absolve"));
-
 var savedText = null;
 
+//Create menu
 browser.menus.create({
   id: "anonymize-text",
   title: "Anonymize Text",
   contexts: ["all"]
 });
 
+//Send message function
 var sendMessage = function(message) 
 {
 	var querying = browser.tabs.query({
@@ -17,16 +17,19 @@ var sendMessage = function(message)
 	querying.then(message);
 };
 
+//Mesage for sending request for text
 function sendAnonymizeText(tabs) 
 {
 	browser.tabs.sendMessage(tabs[0].id, { id: "anonymizeText"});
 }
 
+//Message for sending transformed text
 function sendTransformedText(tabs) 
 {
 	browser.tabs.sendMessage(tabs[0].id, {id: "transformedText", target: target, savedText: savedText});
 }
 
+//When context menu clicked send message
 browser.menus.onClicked.addListener((info, tab) => 
 {
 	if(info.menuItemId == "anonymize-text")
@@ -40,20 +43,24 @@ function normalizeText(transformText)
 {
 	transformText = normalizeCommas(transformText);
 	transformText = normalizeSpaces(transformText);
+	
 	while(transformText.includes("  "))
 	{
 		transformText = normalizeSpaces(transformText);
 	}
+	
 	transformText = normalizeEndingPunctuation(transformText);
 	transformText = normalizeCapitalization(transformText);
 	return transformText;
 }
 
+//Is ending punctuation
 function isEndingPunctuation(ch)
 {
 	return (ch == '.' || ch == '!' || ch == '?');
 }
 
+//Cleans up capitalization
 function normalizeCapitalization(transformText)
 {
 	for(var i = 0; i < transformText.length; i++)
@@ -102,6 +109,7 @@ function normalizeSpaces(transformText)
 	return transformText.replace("  ", " ");
 }
 
+//Does the anonymization process
 function anonymizeText(transformText) 
 {
 	
@@ -110,22 +118,16 @@ function anonymizeText(transformText)
 		
 	var split = [];
 		
-	console.log(out);
-		
 	var index = 0;
 	for(var i = 0; i < out.length; i++)
 	{
 		var outSplit = out[i].split(" ");
-		console.log(outSplit);
 		for(var j = 0; j < outSplit.length; j++)
 		{
-			//console.log(outSplit[j]);
 			split[index] = outSplit[j];
 			index += 1;
 		}
 	}
-		
-	console.log(split);
 		
 	for(var i = 0; i < split.length; i++)
 	{	
@@ -133,12 +135,11 @@ function anonymizeText(transformText)
 		var capital = false;
 		if(checkFor[0] == checkFor[0].toUpperCase())
 			capital = true;
-		//console.log("Check for: " + checkFor);
+		
 		var synonym = thesaurus.get(checkFor);
 		if(capital)
 			synonym = thesaurus.get(checkFor.toLowerCase());
 			
-		//console.log(checkFor + " : " + synonym);
 		if(synonym != undefined)
 		{
 			var replace = undefined;
@@ -150,17 +151,15 @@ function anonymizeText(transformText)
 			{
 				replace = synonym;
 			}
-			//console.log("Is capital: " + capital);
 			doc.replace(split[i], replace);
 		}
 	}
-	console.log(doc.sentences());
 	var outText = doc.out('text');
-	console.log("outText: " + outText);
 	var cleanedText = normalizeText(outText);
 	return cleanedText;
 }
 
+//Listener for when text is transformed, sends update to front end
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) 
 {
 	if(request.id == "transformText") 
@@ -169,6 +168,5 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse)
 		//Save transformed text
 		savedText = transformedText;
 		sendMessage(sendTransformedText);
-		console.log("sending transformed text");
 	}
 });

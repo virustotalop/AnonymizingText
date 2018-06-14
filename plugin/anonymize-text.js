@@ -1,31 +1,25 @@
+//Saves element id to background script when right clicked
 //https://stackoverflow.com/questions/7703697/how-to-retrieve-the-element-where-a-contextmenu-has-been-executed
-//Modified from the code above
-
-
-
 document.addEventListener("mousedown", function(event)
 {
 	if(event.button == 2) 
 	{ 
-        	var clicked = event.target;
-			//alert("right clicked");
+        var clicked = event.target;
 		browser.runtime.sendMessage({
 			id: "currentTarget",
 			target: clicked.id
-		});
-		
+		});	
 	}
 }, true);
 
-
+//Request target to be sent to backend
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) 
 {
 	if(request.id == "anonymizeText") 
 	{
-			//alert("Received anonymizeText");
         	browser.runtime.sendMessage({
-			id: "sendTarget"
-		});
+				id: "sendTarget"
+			});
 	}
 });
 
@@ -34,11 +28,9 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse)
 {
 	if(request.id == "receiveTarget")
 	{
-		//alert("received target");
 		var targetId = request.target;
 		var requestedTarget = document.getElementById(targetId);
 		var requestedText = requestedTarget.value;
-		//alert(requestedText);
 		browser.runtime.sendMessage({
 			id: "transformText",
 			savedText: requestedText
@@ -57,5 +49,3 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse)
 		requestedTarget.value = transformedText;
 	}
 });
-
-
