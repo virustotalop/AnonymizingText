@@ -16,7 +16,7 @@ plugin_path = os.path.join(os.path.abspath(os.curdir), "plugin")
 
 driver.install_addon(plugin_path, temporary=True)
 
-driver.get("http://localhost/test.html")
+driver.get("http://127.0.0.1:2995/static/test.html")
 
 os.chdir("tools")
 

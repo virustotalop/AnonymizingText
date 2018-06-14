@@ -1,6 +1,8 @@
 # Tool setup
 * pip install praw
 * Run setup-workspace.py
+* pip install Flask
+* Run run-webserver.py
 * Run scrape-documents.py, you will need a reddit api key
 * pip install selenium
 * pip install PyAutoGUI
@@ -8,4 +10,4 @@
 * Run anonymize-documents.py, you will need a local web server setup with test.html on localhost/test.html
 * pip install -U textblob
 * python -m textblob.download_corpora
-* Run document analysis to get analyzed reports per document and the data averaged overall
+* Run document-analysis.py to get analyzed reports per document and the data averaged
