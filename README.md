@@ -4,6 +4,18 @@ This project is meant to be research in anonymizing a user's text. There has bee
 
 # Getting started
 
+## Loading in browser plugin
+
+* Have the latest version of Firefox installed.
+* Download the latest version of the repository.
+* Unzip the repository
+* Navigate to about:debugging
+* Load in a temporary extension
+* Navigate to where the repository was unzipped to
+* Select the manifest.json to load in the plugin
+
+## Development
+
 If you want to help with development you can take a look at the [tools directory](/tools) for getting the development environment setup.
 
 # How does it work?
