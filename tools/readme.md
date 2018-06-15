@@ -1,4 +1,5 @@
 # Tool setup
+* Install the latest version of python 3.x
 * pip install praw
 * Run setup-workspace.py
 * pip install Flask
